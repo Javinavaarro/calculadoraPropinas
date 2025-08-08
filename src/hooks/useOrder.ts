@@ -27,11 +27,17 @@ export default function useOrder(){
         setOrder(order.filter(item => item.id !== id)) //Filtra y devuelve todos los que estén en la orden menos el del id seleccionado
     }
 
+    const placeOrder = () => {
+        setOrder([])
+        setTip(0)
+    }
+
     return {
         order,
         tip,
         setTip,
         addItem, 
-        removeItem  
+        removeItem,
+        placeOrder
     }
 }

@@ -7,7 +7,7 @@ import TipPercentageForm from "./components/tipPercentageForm"
 
 function App() {
 
-  const { order, addItem, removeItem, tip, setTip } = useOrder()
+  const { order, addItem, removeItem, tip, setTip, placeOrder } = useOrder()
  
 
   return (
@@ -34,19 +34,27 @@ function App() {
         </div>
 
         <div className="border border-dashed border-slate-300 p-5 rounded-lg space-y-10">
+          {order.length > 0 ? ( //Que solo se carguen esos componentes cuando haya algo añadido a la orden
+          <>
+            <OrderContents
+            order={order}
+            removeItem={removeItem}
+            />
+
+            <TipPercentageForm
+            setTip={setTip}
+            tip={tip}
+            />
+
+            <OrderTotal
+            order={order}
+            tip={tip}
+            placeOrder={placeOrder}/>
+          </>
+          ):( 
+            <p className="text-center">La orden está vacía</p>
+          ) }
           
-          <OrderContents
-          order={order}
-          removeItem={removeItem}
-          />
-
-          <TipPercentageForm
-          setTip={setTip}
-          />
-
-          <OrderTotal
-          order={order}
-          tip={tip}/>
         </div>
       </main>
     </>
